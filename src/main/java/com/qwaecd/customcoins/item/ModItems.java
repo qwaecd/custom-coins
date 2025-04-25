@@ -1,6 +1,8 @@
 package com.qwaecd.customcoins.item;
 
+import com.qwaecd.customcoins.item.coin.DiamondCoin;
 import com.qwaecd.customcoins.item.coin.GoldCoin;
+import com.qwaecd.customcoins.item.coin.IronCoin;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -40,5 +42,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> GoldCoin = registerItem("gold_coin",
             () -> new GoldCoin(new Item.Properties()));
+    public static final RegistryObject<Item> IronCoin = registerItem("iron_coin",
+            () -> new IronCoin(new Item.Properties()));
+    public static final RegistryObject<Item> DiamondCoin = registerItem("diamond_coin",
+            () -> new DiamondCoin(new Item.Properties()));
 
 }

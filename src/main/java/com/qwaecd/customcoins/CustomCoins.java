@@ -16,7 +16,7 @@ import static com.qwaecd.customcoins.item.ModItems.TABS;
 public class CustomCoins
 {
     public static final String MODID = "customcoins";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public CustomCoins(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();

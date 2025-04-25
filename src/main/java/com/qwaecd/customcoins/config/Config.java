@@ -1,13 +1,14 @@
 package com.qwaecd.customcoins.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import static com.qwaecd.customcoins.CustomCoins.LOGGER;
 
 public class Config {
     public static ForgeConfigSpec SPEC;
 
-    public static ForgeConfigSpec.ConfigValue<List<String>> whiteListPlayerName;
+    public static ForgeConfigSpec.ConfigValue<List< ? extends String>> whiteListPlayerName;
 
     static {
         ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -19,12 +20,17 @@ public class Config {
         //[General]:
         whiteListPlayerName = builder
                 .comment("这是一个白名单列表，用于存储允许的玩家名称。")
-                .define("whiteListPlayerName",new ArrayList<String>(),(Object o) -> o instanceof String);
+                .defineList("whiteListPlayerName", Collections.emptyList(),entry -> entry instanceof String);
 
         builder.pop();
     }
 
     public static List<String> getWhiteListPlayerName(){
-        return whiteListPlayerName.get();
+        try {
+            return (List<String>) whiteListPlayerName.get();
+        } catch (Exception e) {
+            LOGGER.error("将名称列表转换为String失败！");
+            return Collections.emptyList();
+        }
     }
 }

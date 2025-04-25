@@ -1,4 +1,7 @@
 {
   "customcoins.main_tab": "custom coins",
-  "item.customcoins.gold_coin": "gold coin"
+  "item.customcoins.gold_coin": "gold coin",
+  "item.customcoins.iron_coin": "iron coin",
+  "item.customcoins.diamond_coin": "diamond coin",
+  "customcoins.coin_to_success": "Success!"
 }

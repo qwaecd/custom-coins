@@ -25,7 +25,10 @@ public abstract class AbstractCoin extends Item {
             CompoundTag tag = itemStack.getOrCreateTag();
             if(tag.getBoolean("check")) return InteractionResult.PASS;
             tag.putBoolean("check",true);
-            player.sendSystemMessage(Component.literal("转换成功！"));
+            if(player.level().isClientSide())
+                player.sendSystemMessage(Component.translatable(
+                        "customcoins.coin_to_success"
+                ));
             return  InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

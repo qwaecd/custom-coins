@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "customcoins:item/gold_coin"
+    "layer0": "customcoins:item/iron_coin"
   }
 }
