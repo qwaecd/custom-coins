@@ -1,6 +1,14 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "customcoins:item/diamond_coin"
-  }
+    "layer0": "customcoins:item/coins/diamond_coin"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "customcoins:item/diamond_coin_check"
+    }
+  ]
 }

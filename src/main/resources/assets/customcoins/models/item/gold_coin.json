@@ -1,6 +1,14 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "customcoins:item/gold_coin"
-  }
+    "layer0": "customcoins:item/coins/gold_coin"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "customcoins:item/gold_coin_check"
+    }
+  ]
 }

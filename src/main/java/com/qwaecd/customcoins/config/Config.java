@@ -19,7 +19,9 @@ public class Config {
         builder.push("General");
         //[General]:
         whiteListPlayerName = builder
+                .comment("This is a whitelist, used to store allowed player names.")
                 .comment("这是一个白名单列表，用于存储允许的玩家名称。")
+                .comment("示例: [\"qwaecd\",\"JohnXue\"]")
                 .defineList("whiteListPlayerName", Collections.emptyList(),entry -> entry instanceof String);
 
         builder.pop();

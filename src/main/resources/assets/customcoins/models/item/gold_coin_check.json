@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "customcoins:item/check_coins/gold_coin_check"
+  }
+}
