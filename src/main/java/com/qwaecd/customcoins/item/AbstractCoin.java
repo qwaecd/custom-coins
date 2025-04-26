@@ -1,5 +1,6 @@
 package com.qwaecd.customcoins.item;
 
+import com.qwaecd.customcoins.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantments;
 import org.jetbrains.annotations.NotNull;
 
-import static com.qwaecd.customcoins.config.Config.getWhiteListPlayerName;
 
 public abstract class AbstractCoin extends Item {
     public AbstractCoin(Properties properties) {
@@ -26,7 +26,7 @@ public abstract class AbstractCoin extends Item {
         if(player == null) return InteractionResult.PASS;
         String playerName = player.getName().getString();
         ItemStack itemStack = context.getItemInHand();
-        if (getWhiteListPlayerName().contains(playerName)){
+        if (Config.whiteListPlayerName.get().contains(playerName)){
             CompoundTag tag = itemStack.getOrCreateTag();
             if(tag.getBoolean("check")) return InteractionResult.PASS;
             putNBT(itemStack,player);

@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
-
 import static com.qwaecd.customcoins.item.ModItems.ITEMS;
 import static com.qwaecd.customcoins.item.ModItems.TABS;
 

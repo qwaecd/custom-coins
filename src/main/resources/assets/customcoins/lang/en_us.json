@@ -4,5 +4,6 @@
   "item.customcoins.iron_coin": "iron coin",
   "item.customcoins.diamond_coin": "diamond coin",
   "customcoins.coin_to_success": "Success!",
-  "item.check_coin_display": "§6§oIssued by %s"
+  "item.check_coin_display": "§6§oIssued by %s",
+  "command.list_player": "Players allowed to print coins: %s"
 }
