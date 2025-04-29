@@ -49,7 +49,7 @@ public abstract class AbstractCoin extends Item {
         String playerName = player.getName().getString();
         ListTag loreList = new ListTag();
         loreList.add(StringTag.valueOf(Component.Serializer.toJson(
-                Component.translatable("item.check_coin_display",playerName)
+                Component.translatable("customcoins.item.check_coin_display",playerName)
                         .withStyle(ChatFormatting.AQUA)
         )));
         CompoundTag displayTag = itemStack.getOrCreateTagElement("display");

@@ -4,6 +4,10 @@
   "item.customcoins.iron_coin": "铁币",
   "item.customcoins.diamond_coin": "钻石币",
   "customcoins.coin_to_success": "转换成功！",
-  "item.check_coin_display": "§6§o由 %s §6§o印发",
-  "command.list_player": "允许印发硬币的玩家：%s"
+  "customcoins.item.check_coin_display": "§6§o由 %s §6§o印发",
+  "customcoins.command.list_player": "允许印发硬币的玩家：%s",
+  "customcoins.command.temp_add_player": "成功添加玩家 %s",
+  "customcoins.command.temp_add_player_fail": "该玩家已经在列表中！",
+  "customcoins.command.temp_remove_player": "成功删除 %s 玩家白名单",
+  "customcoins.command.temp_remove_player_fail": "列表中该玩家不存在！"
 }
