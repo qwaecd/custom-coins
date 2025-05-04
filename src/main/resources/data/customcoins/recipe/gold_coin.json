@@ -9,7 +9,7 @@
     "###"
   ],
   "result": {
-    "item": "customcoins:gold_coin",
+    "id": "customcoins:gold_coin",
     "count": 3
   }
 }

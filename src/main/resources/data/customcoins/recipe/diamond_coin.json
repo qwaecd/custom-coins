@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:diamond"
     }
   },
   "pattern": [
     "###"
   ],
   "result": {
-    "item": "customcoins:iron_coin",
+    "id": "customcoins:diamond_coin",
     "count": 3
   }
 }

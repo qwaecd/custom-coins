@@ -19,13 +19,12 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractCoin extends Item {
     public AbstractCoin(Properties properties) {
-        super(properties.stacksTo(64));
+        super(properties);
     }
 
     @Override
@@ -38,8 +37,6 @@ public abstract class AbstractCoin extends Item {
             CustomModelData customData = itemStack.getComponents().get(DataComponents.CUSTOM_MODEL_DATA);
             if (customData != null) return InteractionResult.PASS;
             putComponents(itemStack, player);
-            if (player.level().isClientSide())
-                player.sendSystemMessage(Component.translatable("customcoins.coin_to_success"));
 
             return InteractionResult.SUCCESS;
         }
