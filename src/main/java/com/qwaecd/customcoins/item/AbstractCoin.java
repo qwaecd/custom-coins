@@ -2,8 +2,12 @@ package com.qwaecd.customcoins.item;
 
 import com.qwaecd.customcoins.config.Config;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -11,7 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -44,12 +50,20 @@ public abstract class AbstractCoin extends Item {
         CustomModelData customModelData = new CustomModelData(1);
         itemStack.set(DataComponents.CUSTOM_MODEL_DATA, customModelData);
 
-        ItemEnchantments.Mutable mutableEnchants = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
 
-//        Holder<Enchantment> enchantment = Holder.direct();
-//        mutableEnchants.set(enchantment, 1);
-//        ItemEnchantments finalEnchants = mutableEnchants.toImmutable();
-//        itemStack.set(DataComponents.ENCHANTMENTS, finalEnchants);
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        HolderLookup.Provider provider = null;
+        if (server != null) {
+            provider = server.registryAccess();
+        }
+        HolderLookup.RegistryLookup<Enchantment> reg = null;
+        if (provider != null) {
+            reg = provider.lookupOrThrow(Registries.ENCHANTMENT);
+        }
+        Holder<Enchantment> inf = reg.get(Enchantments.INFINITY).get();
+        int levelInt = 1;
+        itemStack.enchant(inf, levelInt);
+
 
         List<Component> componentList = new ArrayList<>();
         String playerName = player.getName().getString();
