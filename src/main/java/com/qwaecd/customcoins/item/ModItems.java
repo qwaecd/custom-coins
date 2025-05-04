@@ -22,6 +22,13 @@ public class ModItems {
 
     private static final Map<String, RegistryObject<Item>> ITEM_REGISTRIES = new LinkedHashMap<>();
 
+    public static final RegistryObject<Item> GoldCoin = registerItem("gold_coin",
+            () -> new GoldCoin(new Item.Properties()));
+    public static final RegistryObject<Item> IronCoin = registerItem("iron_coin",
+            () -> new IronCoin(new Item.Properties()));
+    public static final RegistryObject<Item> DiamondCoin = registerItem("diamond_coin",
+            () -> new DiamondCoin(new Item.Properties()));
+
     public static final RegistryObject<CreativeModeTab> MAIN_TAB = TABS.register("main_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable(MODID + ".main_tab"))
@@ -38,12 +45,5 @@ public class ModItems {
     public static Item getItem(String name) {
         return ITEM_REGISTRIES.get(name).get();
     }
-
-    public static final RegistryObject<Item> GoldCoin = registerItem("gold_coin",
-            () -> new GoldCoin(new Item.Properties()));
-    public static final RegistryObject<Item> IronCoin = registerItem("iron_coin",
-            () -> new IronCoin(new Item.Properties()));
-    public static final RegistryObject<Item> DiamondCoin = registerItem("diamond_coin",
-            () -> new DiamondCoin(new Item.Properties()));
 
 }

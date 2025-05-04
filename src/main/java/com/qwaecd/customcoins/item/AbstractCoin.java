@@ -28,7 +28,7 @@ public abstract class AbstractCoin extends Item {
         ItemStack itemStack = context.getItemInHand();
         if (Config.whiteListPlayerName.get().contains(playerName)){
             CompoundTag tag = itemStack.getOrCreateTag();
-            if(tag.getBoolean("check")) return InteractionResult.PASS;
+            if(tag.contains("CustomModelData")) return InteractionResult.PASS;
             putNBT(itemStack,player);
 
             if(player.level().isClientSide())
@@ -43,7 +43,6 @@ public abstract class AbstractCoin extends Item {
 
     public static void putNBT(ItemStack itemStack,Player player){
         CompoundTag tag = itemStack.getOrCreateTag();
-        tag.putBoolean("check",true);
         tag.putInt("CustomModelData",1);
         itemStack.enchant(Enchantments.INFINITY_ARROWS,1);
         String playerName = player.getName().getString();
