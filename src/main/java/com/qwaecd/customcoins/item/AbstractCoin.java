@@ -6,13 +6,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraftforge.common.util.FakePlayer;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 
 public abstract class AbstractCoin extends Item {
@@ -24,6 +28,10 @@ public abstract class AbstractCoin extends Item {
     public @NotNull InteractionResult useOn(@NotNull UseOnContext context){
         Player player = context.getPlayer();
         if(player == null) return InteractionResult.PASS;
+        //这该死的 create 机械手
+        if(player instanceof FakePlayer || Objects.equals(player.getUUID().toString(), "9e2faded-cafe-4ec2-c314-dad129ae971d")){
+            return InteractionResult.PASS;
+        }
         String playerName = player.getName().getString();
         ItemStack itemStack = context.getItemInHand();
         if (Config.whiteListPlayerName.get().contains(playerName)){
