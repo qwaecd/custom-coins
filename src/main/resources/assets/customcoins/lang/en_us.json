@@ -4,7 +4,7 @@
   "item.customcoins.iron_coin": "iron coin",
   "item.customcoins.diamond_coin": "diamond coin",
   "customcoins.coin_to_success": "Success!",
-  "customcoins.item.check_coin_display": "§6§oIssued by %s",
+  "customcoins.item.check_coin_display": "§6Issued by %s",
   "customcoins.command.list_player": "Players allowed to print coins: %s",
   "customcoins.command.temp_add_player": "Successfully added player %s",
   "customcoins.command.temp_add_player_fail": "The player is already in the list!",

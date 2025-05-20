@@ -1,26 +1,22 @@
 package com.qwaecd.customcoins.item;
 
 import com.qwaecd.customcoins.config.Config;
+import com.qwaecd.customcoins.data.CoinData;
+import com.qwaecd.customcoins.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomModelData;
-import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,38 +38,88 @@ public abstract class AbstractCoin extends Item {
         if (Config.whiteListPlayerName.get().contains(playerName)) {
             CustomModelData customData = itemStack.getComponents().get(DataComponents.CUSTOM_MODEL_DATA);
             if (customData != null) return InteractionResult.PASS;
-            putComponents(itemStack, player);
+            itemStack.set(ModDataComponents.COIN_DATA_TYPE, new CoinData(playerName, 1));
+            itemStack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(1));
 
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack itemStack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag){
+        super.appendHoverText(itemStack, context, tooltipComponents, tooltipFlag);
 
-    public static void putComponents(ItemStack itemStack, Player player){
-        CustomModelData customModelData = new CustomModelData(1);
-        itemStack.set(DataComponents.CUSTOM_MODEL_DATA, customModelData);
 
+        if (containsData(itemStack)) {
+            CoinData coinData = itemStack.getComponents().get(ModDataComponents.COIN_DATA_TYPE.get());
+            String owner = coinData.ownerName();
+            tooltipComponents.add(
+                    Component.translatable("customcoins.item.check_coin_display",owner)
+                            .withStyle(ChatFormatting.AQUA)
+            );
+            if(tooltipFlag.isAdvanced()){
+                //若打开高级提示框 F3+H
+                tooltipComponents.add(
+                        Component.literal("data version: " + coinData.dataVersion())
+                                .withStyle(ChatFormatting.DARK_GRAY)
+                );
+            }
+//            if(Screen.hasShiftDown()){
+//
+//            }
 
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        HolderLookup.Provider provider = null;
-        if (server != null) {
-            provider = server.registryAccess();
         }
-        HolderLookup.RegistryLookup<Enchantment> reg = null;
-        if (provider != null) {
-            reg = provider.lookupOrThrow(Registries.ENCHANTMENT);
-        }
-        Holder<Enchantment> inf = reg.get(Enchantments.INFINITY).get();
-        int levelInt = 1;
-        itemStack.enchant(inf, levelInt);
 
-
-        List<Component> componentList = new ArrayList<>();
-        String playerName = player.getName().getString();
-        componentList.add(
-                Component.translatable("customcoins.item.check_coin_display", playerName).withStyle(ChatFormatting.AQUA)
-        );
-        ItemLore lore = new ItemLore(componentList);
-        itemStack.set(DataComponents.LORE,lore);
     }
+
+
+    @Override
+    public Component getName(ItemStack stack) {
+        CoinData coinData = stack.getComponents().get(ModDataComponents.COIN_DATA_TYPE.get());
+
+        if (containsData(stack)) {
+            String name = super.getName(stack).getString();
+            return Component.translatable(name).withStyle(ChatFormatting.BOLD, ChatFormatting.AQUA);
+        }
+
+        return super.getName(stack);
+    }
+
+    @Override
+    public boolean isFoil(ItemStack stack){
+        return containsData(stack);
+    }
+
+    private boolean containsData(ItemStack itemStack){
+        CoinData coinData = itemStack.getComponents().get(ModDataComponents.COIN_DATA_TYPE.get());
+        return coinData != null && !coinData.ownerName().isEmpty();
+    }
+//    public static void putComponents(ItemStack itemStack, Player player){
+//        CustomModelData customModelData = new CustomModelData(1);
+//        itemStack.set(DataComponents.CUSTOM_MODEL_DATA, customModelData);
+//
+//
+//        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+//        HolderLookup.Provider provider = null;
+//        if (server != null) {
+//            provider = server.registryAccess();
+//        }
+//        HolderLookup.RegistryLookup<Enchantment> reg = null;
+//        if (provider != null) {
+//            reg = provider.lookupOrThrow(Registries.ENCHANTMENT);
+//        }
+//        Holder<Enchantment> inf = reg.get(Enchantments.INFINITY).get();
+//        int levelInt = 1;
+//        itemStack.enchant(inf, levelInt);
+//
+//
+//        List<Component> componentList = new ArrayList<>();
+//        String playerName = player.getName().getString();
+//        componentList.add(
+//                Component.translatable("customcoins.item.check_coin_display", playerName).withStyle(ChatFormatting.AQUA)
+//        );
+//        ItemLore lore = new ItemLore(componentList);
+//        itemStack.set(DataComponents.LORE,lore);
+//    }
 }

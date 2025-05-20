@@ -4,7 +4,7 @@
   "item.customcoins.iron_coin": "铁币",
   "item.customcoins.diamond_coin": "钻石币",
   "customcoins.coin_to_success": "转换成功！",
-  "customcoins.item.check_coin_display": "§6§o由 %s §6§o印发",
+  "customcoins.item.check_coin_display": "§6由 %s §6印发",
   "customcoins.command.list_player": "允许印发硬币的玩家：%s",
   "customcoins.command.temp_add_player": "成功添加玩家 %s",
   "customcoins.command.temp_add_player_fail": "该玩家已经在列表中！",

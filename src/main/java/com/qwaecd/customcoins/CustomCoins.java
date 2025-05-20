@@ -2,6 +2,7 @@ package com.qwaecd.customcoins;
 
 import com.mojang.logging.LogUtils;
 import com.qwaecd.customcoins.config.Config;
+import com.qwaecd.customcoins.data.ModDataComponents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -22,6 +23,7 @@ public class CustomCoins
     {
         ITEMS.register(modEventBus);
         TABS.register(modEventBus);
+        ModDataComponents.DATA_COMPONENTS_REGISTRAR.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
